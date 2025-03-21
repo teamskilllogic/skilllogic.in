@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowRight, MessageCircle } from "lucide-react";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -46,13 +46,23 @@ const Footer: React.FC = () => {
                 <Instagram size={18} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/skilllogic-technologies/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} />
+              </a>
+            </div>
+            <div className="mt-6">
+              <a
+                href="https://wa.me/918318943040"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full transition-colors"
+              >
+                <MessageCircle size={18} className="mr-2" /> Get in touch on WhatsApp
               </a>
             </div>
           </div>
@@ -118,13 +128,18 @@ const Footer: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-start">
                 <MapPin className="mt-1 mr-3 text-primary" size={18} />
-                <p className="text-muted-foreground">123 Web Avenue, Digital District, Tech City, 12345</p>
+                <p className="text-muted-foreground">Civil Lines Power House Road Bhadohi -221401, Uttar Pradesh India</p>
               </div>
-              <div className="flex items-center">
-                <Phone className="mr-3 text-primary" size={18} />
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-foreground">
-                  +1 (234) 567-890
-                </a>
+              <div className="flex items-start">
+                <Phone className="mt-1 mr-3 text-primary" size={18} />
+                <div className="flex flex-col">
+                  <a href="tel:+918318943040" className="text-muted-foreground hover:text-foreground">
+                    +91 8318943040
+                  </a>
+                  <a href="tel:+919125138209" className="text-muted-foreground hover:text-foreground">
+                    +91 9125138209
+                  </a>
+                </div>
               </div>
               <div className="flex items-center">
                 <Mail className="mr-3 text-primary" size={18} />
