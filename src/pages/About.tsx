@@ -1,11 +1,22 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
-import { CheckCircle, ArrowRight, Users, Lightbulb, BarChart, Target, Award, TrendingUp } from "lucide-react";
+import { CheckCircle, ArrowRight, Users, Lightbulb, BarChart, Target, Award, TrendingUp, Code, Laptop } from "lucide-react";
 
 const AboutPage: React.FC = () => {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  
+  // Additional development images for the About page
+  const developmentImages = [
+    "/lovable-uploads/b84a5741-b91e-4e1c-9477-f4ea5a5f79f0.png",
+    "/lovable-uploads/2b3336d5-166c-47f5-9e1f-a622ce4b19e0.png",
+    "/lovable-uploads/a3bbc24a-dc41-413c-b108-cf5dd5323617.png",
+    "/lovable-uploads/a0dfe608-8de8-4136-b51c-035f604b0d84.png",
+    "/lovable-uploads/4786fb50-24c3-4758-93c9-099152b6917c.png"
+  ];
+  
   const team = [
     {
       name: "Alex Johnson",
@@ -40,7 +51,9 @@ const AboutPage: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-fadeIn');
-            entry.target.style.opacity = '1';
+            if (entry.target instanceof HTMLElement) {
+              entry.target.style.opacity = '1';
+            }
           }
         });
       },
@@ -48,17 +61,71 @@ const AboutPage: React.FC = () => {
     );
 
     document.querySelectorAll('.reveal').forEach((el) => {
-      el.style.opacity = '0';
-      observer.observe(el);
+      if (el instanceof HTMLElement) {
+        el.style.opacity = '0';
+        observer.observe(el);
+      }
+    });
+
+    // Custom cursor effect
+    const handleMouseMove = (e: MouseEvent) => {
+      if (cursorRef.current) {
+        const x = e.clientX;
+        const y = e.clientY;
+        cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Animated code blocks
+    const codeElements = document.querySelectorAll('.code-block');
+    codeElements.forEach((el) => {
+      if (el instanceof HTMLElement) {
+        const typeSpeed = 50;
+        const codeText = el.textContent || '';
+        el.textContent = '';
+        
+        let i = 0;
+        const typeCode = () => {
+          if (i < codeText.length) {
+            el.textContent += codeText.charAt(i);
+            i++;
+            setTimeout(typeCode, typeSpeed);
+          }
+        };
+        
+        const elObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                typeCode();
+                elObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        
+        elObserver.observe(el);
+      }
     });
 
     return () => {
       observer.disconnect();
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
+      {/* Custom cursor follower */}
+      <div 
+        ref={cursorRef} 
+        className="fixed w-6 h-6 rounded-full border border-primary/50 pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block" 
+        style={{ transition: 'transform 0.1s ease-out' }}
+      />
+      
       <Navbar />
       
       <main className="pt-32 pb-20">
@@ -90,7 +157,7 @@ const AboutPage: React.FC = () => {
               <div>
                 <div className="aspect-square rounded-2xl overflow-hidden relative shadow-lg">
                   <img 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    src={developmentImages[2]} 
                     alt="SkillLogic Team" 
                     className="w-full h-full object-cover"
                   />
@@ -100,6 +167,139 @@ const AboutPage: React.FC = () => {
                       <p className="text-white/80">Passionate experts committed to your success</p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Developer Workspace Showcase */}
+        <section className="py-16 reveal">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="inline-block px-3 py-1 mb-4 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
+                Our Workspace
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Where <span className="text-gradient">Innovation</span> Happens
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Take a look at our development environment where we craft digital solutions with precision and creativity.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {developmentImages.map((img, index) => (
+                <div
+                  key={index}
+                  className="group overflow-hidden rounded-xl border border-border shadow-sm hover-card opacity-0 animate-fadeIn"
+                  style={{ animationDelay: `${(index + 1) * 200}ms`, animationFillMode: 'forwards' }}
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={img}
+                      alt={`Development workspace ${index + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-5 bg-background">
+                    <div className="flex items-center mb-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mr-3">
+                        <Code className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-lg font-semibold">
+                        {index === 0 && "Modern Development Setup"}
+                        {index === 1 && "Clean Workspace Environment"}
+                        {index === 2 && "Focused Development"}
+                        {index === 3 && "Peaceful Coding Atmosphere"}
+                        {index === 4 && "Collaborative Teamwork"}
+                      </h3>
+                    </div>
+                    <p className="text-muted-foreground text-sm">
+                      {index === 0 && "Our dual-monitor setup allows for efficient coding and testing workflows."}
+                      {index === 1 && "Natural light and plants create a refreshing development environment."}
+                      {index === 2 && "Quality hardware and distraction-free environment for optimal coding."}
+                      {index === 3 && "Ambient lighting enhances focus during late-night coding sessions."}
+                      {index === 4 && "Team members working together to deliver exceptional results."}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Code Animation Section */}
+        <section className="py-16 bg-muted/20 reveal">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-10">
+                <div className="inline-block px-3 py-1 mb-4 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
+                  Our Expertise
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  The <span className="text-gradient">Code</span> Behind Our Success
+                </h2>
+              </div>
+              
+              <div className="rounded-xl overflow-hidden shadow-lg bg-skilllogic-dark text-green-400">
+                <div className="flex items-center bg-skilllogic-dark/90 px-4 py-2 border-b border-gray-800">
+                  <div className="flex space-x-2 mr-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="text-xs text-gray-400">skilllogic.tsx</div>
+                </div>
+                <div className="p-6 font-mono text-sm overflow-x-auto">
+                  <pre className="code-block">
+{`import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
+interface ProjectProps {
+  title: string;
+  description: string;
+  technologies: string[];
+}
+
+const Project: React.FC<ProjectProps> = ({ 
+  title, 
+  description, 
+  technologies 
+}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    setIsVisible(true);
+    // Initialize project components
+    console.log(\`Project \${title} initialized\`);
+  }, [title]);
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0,
+        y: isVisible ? 0 : 20
+      }}
+      transition={{ duration: 0.5 }}
+      className="project-card"
+    >
+      <h3 className="text-xl font-bold">{title}</h3>
+      <p>{description}</p>
+      <div className="tech-stack">
+        {technologies.map((tech, index) => (
+          <span key={index} className="tech-badge">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+export default Project;`}
+                  </pre>
                 </div>
               </div>
             </div>
@@ -127,25 +327,25 @@ const AboutPage: React.FC = () => {
                   year: "2024",
                   title: "The Beginning",
                   description: "SkillLogic.in was founded with a vision to provide cutting-edge web development solutions for businesses of all sizes, focusing on quality, innovation, and customer satisfaction.",
-                  image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  image: developmentImages[0]
                 },
                 {
                   year: "2025",
                   title: "Expanding Our Reach",
                   description: "We are growing our expertise in UI/UX design, website development, and SEO optimization to help businesses establish a strong digital presence.",
-                  image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  image: developmentImages[1]
                 },
                 {
                   year: "2026",
                   title: "Scaling Up (Future Vision)",
                   description: "With an expanding client base, we plan to incorporate AI-powered solutions and automation into our web development services to offer smarter, more efficient websites.",
-                  image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  image: developmentImages[2]
                 },
                 {
                   year: "2027",
                   title: "Industry Innovators (Future Vision)",
                   description: "SkillLogic.in aims to become a recognized name in the web development industry, delivering high-performance, scalable, and user-friendly web solutions worldwide.",
-                  image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                  image: developmentImages[3]
                 }
               ].map((step, index) => (
                 <div key={index} className="relative opacity-0 animate-fadeInLeft" style={{ animationDelay: `${index * 300}ms`, animationFillMode: 'forwards' }}>
@@ -237,7 +437,11 @@ const AboutPage: React.FC = () => {
                       description: "We focus on achieving measurable outcomes that directly contribute to our clients' business success."
                     }
                   ].map((value, index) => (
-                    <div key={index} className="p-5 rounded-lg bg-background border border-border hover-card transform transition-all hover:scale-105 hover:shadow-md">
+                    <div 
+                      key={index} 
+                      className="p-5 rounded-lg bg-background border border-border hover-card transform transition-all hover:scale-105 hover:shadow-md opacity-0 animate-fadeIn"
+                      style={{ animationDelay: `${(index + 10) * 150}ms`, animationFillMode: 'forwards' }}
+                    >
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
                         {value.icon}
                       </div>
@@ -292,7 +496,7 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* Stats Section */}
-        <section className="py-16 bg-primary text-primary-foreground reveal">
+        <section className="py-16 bg-gradient-to-r from-primary to-skilllogic-teal text-primary-foreground reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
@@ -317,7 +521,11 @@ const AboutPage: React.FC = () => {
                   label: "In Everything We Do"
                 }
               ].map((stat, index) => (
-                <div key={index} className="text-center transform transition-all hover:scale-110">
+                <div 
+                  key={index} 
+                  className="text-center transform transition-all hover:scale-110 opacity-0 animate-fadeIn"
+                  style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
+                >
                   <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
                     {stat.icon}
                   </div>

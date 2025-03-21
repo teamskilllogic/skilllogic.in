@@ -1,9 +1,16 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Check, Users, Target, BarChart3, Clock, ChevronRight } from "lucide-react";
+import { Check, Users, Target, BarChart3, Clock, ChevronRight, Code, Laptop } from "lucide-react";
 
 const AboutSection: React.FC = () => {
+  // Dev-themed images
+  const devImages = [
+    "/lovable-uploads/337af8a2-276c-413a-b0f6-aedd47585419.png",
+    "/lovable-uploads/1b43a1f0-6e33-4651-9c2a-3e8b15f8860c.png",
+    "/lovable-uploads/e518dcbd-d504-46ee-b0ee-f1cdf8a56d29.png"
+  ];
+  
   const qualities = [
     {
       icon: <Users className="w-5 h-5" />,
@@ -88,6 +95,23 @@ const AboutSection: React.FC = () => {
               <p className="text-muted-foreground animate-fadeIn animate-delay-600 animate-fill-both">
                 At SkillLogic, we're more than just a web development company. We're a team of passionate digital craftspeople dedicated to creating exceptional online experiences that help businesses grow.
               </p>
+              
+              {/* Image Showcase */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                {devImages.map((image, index) => (
+                  <div 
+                    key={index} 
+                    className="rounded-lg overflow-hidden shadow-md hover-card opacity-0 animate-fadeIn"
+                    style={{ animationDelay: `${(index + 4) * 150}ms`, animationFillMode: 'forwards' }}
+                  >
+                    <img 
+                      src={image} 
+                      alt={`Development process ${index + 1}`} 
+                      className="w-full h-auto aspect-video object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
               
               <div className="space-y-4 animate-fadeIn animate-delay-900 animate-fill-both">
                 <h3 className="text-xl font-semibold">Why Choose Us?</h3>
