@@ -36,30 +36,25 @@ const AboutSection: React.FC = () => {
             <div className="relative pl-8 border-l border-primary/30 space-y-12">
               {[
                 {
-                  year: "2013",
-                  title: "Our Beginning",
-                  description: "SkillLogic was founded with a mission to provide exceptional web development services to businesses of all sizes."
+                  year: "2024",
+                  title: "The Beginning",
+                  description: "SkillLogic.in was founded with a vision to provide cutting-edge web development solutions for businesses of all sizes, focusing on quality, innovation, and customer satisfaction."
                 },
                 {
-                  year: "2016",
-                  title: "Expanding Services",
-                  description: "We expanded our service offerings to include UI/UX design and began working with clients across multiple industries."
+                  year: "2025",
+                  title: "Expanding Our Reach",
+                  description: "We are growing our expertise in UI/UX design, website development, and SEO optimization to help businesses establish a strong digital presence."
                 },
                 {
-                  year: "2018",
-                  title: "Growing Team",
-                  description: "Our team grew to include specialists in various technologies, allowing us to tackle more complex projects."
+                  year: "2026",
+                  title: "Scaling Up (Future Vision)",
+                  description: "With an expanding client base, we plan to incorporate AI-powered solutions and automation into our web development services to offer smarter, more efficient websites."
                 },
                 {
-                  year: "2020",
-                  title: "Digital Transformation",
-                  description: "We helped numerous businesses pivot to digital during challenging times, enhancing our remote collaboration capabilities."
-                },
-                {
-                  year: "Today",
-                  title: "Industry Leaders",
-                  description: "We've established ourselves as industry leaders, recognized for our expertise, innovation, and customer satisfaction."
-                },
+                  year: "2027",
+                  title: "Industry Innovators (Future Vision)",
+                  description: "SkillLogic.in aims to become a recognized name in the web development industry, delivering high-performance, scalable, and user-friendly web solutions worldwide."
+                }
               ].map((item, index) => (
                 <div 
                   key={index} 
@@ -98,7 +93,7 @@ const AboutSection: React.FC = () => {
                 <h3 className="text-xl font-semibold">Why Choose Us?</h3>
                 <ul className="space-y-3">
                   {[
-                    "10+ years of industry experience",
+                    "Innovative digital solutions",
                     "Team of expert developers and designers",
                     "Custom solutions tailored to your needs",
                     "Focus on results and ROI",

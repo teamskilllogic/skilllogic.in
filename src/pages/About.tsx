@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import { Link } from "react-router-dom";
@@ -33,6 +33,30 @@ const AboutPage: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    // Add scroll animation for sections
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeIn');
+            entry.target.style.opacity = '1';
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      el.style.opacity = '0';
+      observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -53,13 +77,13 @@ const AboutPage: React.FC = () => {
                   We're a team of passionate web developers, designers, and digital strategists dedicated to creating exceptional online experiences that drive business success.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link to="/services" className="btn-primary inline-flex items-center">
+                  <Link to="/services" className="btn-primary inline-flex items-center group">
                     Our Services
-                    <ArrowRight size={18} className="ml-2" />
+                    <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>
-                  <Link to="/contact" className="px-8 py-3 rounded-full bg-background border border-border text-foreground font-medium transition-all hover:bg-muted inline-flex items-center">
+                  <Link to="/contact" className="px-8 py-3 rounded-full bg-background border border-border text-foreground font-medium transition-all hover:bg-muted inline-flex items-center group">
                     Contact Us
-                    <ArrowRight size={18} className="ml-2" />
+                    <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
               </div>
@@ -83,64 +107,58 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* Our Story Section */}
-        <section className="py-20">
+        <section className="py-20 reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <div className="inline-block px-3 py-1 mb-4 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
                 Our Story
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                How SkillLogic Began
+                SkillLogic Journey: From Idea to Innovation
               </h2>
               <p className="text-muted-foreground">
-                Our journey from a small startup to an established web development company focused on creating digital excellence.
+                Our journey from a visionary concept to creating innovative digital solutions
               </p>
             </div>
             
             <div className="relative pl-8 border-l border-primary/30 space-y-16 max-w-4xl mx-auto">
               {[
                 {
-                  year: "2013",
+                  year: "2024",
                   title: "The Beginning",
-                  description: "SkillLogic was founded with a simple mission: to help businesses leverage the power of the web to grow and succeed. Starting with just two developers, we focused on creating custom websites for local businesses.",
+                  description: "SkillLogic.in was founded with a vision to provide cutting-edge web development solutions for businesses of all sizes, focusing on quality, innovation, and customer satisfaction.",
                   image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                 },
                 {
-                  year: "2016",
-                  title: "Expanding Our Expertise",
-                  description: "As our client base grew, so did our team and capabilities. We expanded our services to include UI/UX design, web application development, and e-commerce solutions. This period marked significant growth as we took on larger and more complex projects.",
+                  year: "2025",
+                  title: "Expanding Our Reach",
+                  description: "We are growing our expertise in UI/UX design, website development, and SEO optimization to help businesses establish a strong digital presence.",
                   image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                 },
                 {
-                  year: "2018",
-                  title: "Embracing Innovation",
-                  description: "Recognizing the rapidly evolving digital landscape, we invested in new technologies and methodologies. Our team began specializing in progressive web apps, responsive design, and advanced web technologies to deliver cutting-edge solutions.",
+                  year: "2026",
+                  title: "Scaling Up (Future Vision)",
+                  description: "With an expanding client base, we plan to incorporate AI-powered solutions and automation into our web development services to offer smarter, more efficient websites.",
                   image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                 },
                 {
-                  year: "2020",
-                  title: "Navigating Challenges",
-                  description: "During the global pandemic, we helped numerous businesses pivot to digital, enabling them to continue operating despite physical restrictions. This period reinforced our commitment to being not just service providers, but strategic partners to our clients.",
-                  image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                },
-                {
-                  year: "Today",
-                  title: "Looking to the Future",
-                  description: "Today, SkillLogic stands as a dynamic digital agency with a global client base. We continue to push boundaries, stay ahead of trends, and deliver exceptional digital experiences that drive tangible results for our clients.",
+                  year: "2027",
+                  title: "Industry Innovators (Future Vision)",
+                  description: "SkillLogic.in aims to become a recognized name in the web development industry, delivering high-performance, scalable, and user-friendly web solutions worldwide.",
                   image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
                 }
               ].map((step, index) => (
-                <div key={index} className="relative">
+                <div key={index} className="relative opacity-0 animate-fadeInLeft" style={{ animationDelay: `${index * 300}ms`, animationFillMode: 'forwards' }}>
                   <div className="absolute -left-12 top-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs">
                     {index + 1}
                   </div>
                   <div className={`grid grid-cols-1 md:grid-cols-5 gap-8 items-center ${index % 2 === 0 ? "" : "md:flex-row-reverse"}`}>
                     <div className={`md:col-span-2 order-2 ${index % 2 === 0 ? "md:order-1" : "md:order-2"}`}>
-                      <div className="aspect-video rounded-xl overflow-hidden shadow-md">
+                      <div className="aspect-video rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
                         <img 
                           src={step.image} 
                           alt={step.title} 
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                         />
                       </div>
                     </div>
@@ -159,7 +177,7 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* Mission & Values */}
-        <section className="py-16 bg-muted/30">
+        <section className="py-16 bg-muted/30 reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
@@ -219,7 +237,7 @@ const AboutPage: React.FC = () => {
                       description: "We focus on achieving measurable outcomes that directly contribute to our clients' business success."
                     }
                   ].map((value, index) => (
-                    <div key={index} className="p-5 rounded-lg bg-background border border-border hover-card">
+                    <div key={index} className="p-5 rounded-lg bg-background border border-border hover-card transform transition-all hover:scale-105 hover:shadow-md">
                       <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
                         {value.icon}
                       </div>
@@ -234,7 +252,7 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* Team Section */}
-        <section className="py-20">
+        <section className="py-20 reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <div className="inline-block px-3 py-1 mb-4 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary">
@@ -252,14 +270,14 @@ const AboutPage: React.FC = () => {
               {team.map((member, index) => (
                 <div 
                   key={index} 
-                  className="rounded-xl overflow-hidden bg-background border border-border hover-card opacity-0 animate-fadeIn"
+                  className="rounded-xl overflow-hidden bg-background border border-border hover-card opacity-0 animate-fadeIn transform transition-all hover:scale-105 hover:shadow-lg"
                   style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
                 >
                   <div className="aspect-square overflow-hidden">
                     <img 
                       src={member.image} 
                       alt={member.name} 
-                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                     />
                   </div>
                   <div className="p-6">
@@ -274,32 +292,32 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* Stats Section */}
-        <section className="py-16 bg-primary text-primary-foreground">
+        <section className="py-16 bg-primary text-primary-foreground reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { 
                   icon: <TrendingUp className="w-8 h-8" />,
-                  number: "100+",
+                  number: "18+",
                   label: "Projects Completed"
                 },
                 { 
                   icon: <Users className="w-8 h-8" />,
-                  number: "50+",
-                  label: "Happy Clients"
+                  number: "100%",
+                  label: "Client Satisfaction"
                 },
                 { 
                   icon: <BarChart className="w-8 h-8" />,
-                  number: "10+",
-                  label: "Years of Experience"
+                  number: "Innovation",
+                  label: "Our Core Value"
                 },
                 { 
                   icon: <Award className="w-8 h-8" />,
-                  number: "15+",
-                  label: "Industry Awards"
+                  number: "Quality",
+                  label: "In Everything We Do"
                 }
               ].map((stat, index) => (
-                <div key={index} className="text-center">
+                <div key={index} className="text-center transform transition-all hover:scale-110">
                   <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
                     {stat.icon}
                   </div>
@@ -312,7 +330,7 @@ const AboutPage: React.FC = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-20">
+        <section className="py-20 reveal">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -321,9 +339,9 @@ const AboutPage: React.FC = () => {
               <p className="text-lg text-muted-foreground mb-8">
                 Partner with SkillLogic and transform your online presence with our expert web development services.
               </p>
-              <Link to="/contact" className="btn-primary inline-flex items-center">
+              <Link to="/contact" className="btn-primary inline-flex items-center group">
                 Get in Touch Today
-                <ArrowRight size={18} className="ml-2" />
+                <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
           </div>

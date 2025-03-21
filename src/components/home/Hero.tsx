@@ -61,13 +61,13 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fadeIn animate-delay-900 animate-fill-both">
-            <Link to="/contact" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center">
+            <Link to="/contact" className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center group">
               Get a Free Consultation
-              <ArrowRight size={18} />
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link to="/portfolio" className="px-8 py-3 rounded-full bg-background border border-border text-foreground font-medium transition-all hover:bg-muted flex items-center gap-2 w-full sm:w-auto justify-center">
+            <Link to="/portfolio" className="px-8 py-3 rounded-full bg-background border border-border text-foreground font-medium transition-all hover:bg-muted flex items-center gap-2 w-full sm:w-auto justify-center group">
               View Our Work
-              <ArrowRight size={18} />
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -75,14 +75,14 @@ const Hero: React.FC = () => {
         {/* Stats */}
         <div className="mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {[
-            { number: "100+", label: "Projects Completed" },
-            { number: "95%", label: "Client Satisfaction" },
-            { number: "10+", label: "Years of Experience" },
-            { number: "50+", label: "Happy Clients" },
+            { number: "18+", label: "Projects Completed" },
+            { number: "100%", label: "Client Satisfaction" },
+            { number: "Innovation", label: "Our Core Value" },
+            { number: "24/7", label: "Customer Support" },
           ].map((stat, index) => (
             <div 
               key={index} 
-              className="relative p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border hover-card"
+              className="relative p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border hover-card transform transition-all hover:scale-105 hover:shadow-md"
               style={{ animationDelay: `${(index + 5) * 150}ms` }}
             >
               <div className="absolute -top-3 -left-3 w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
@@ -94,6 +94,47 @@ const Hero: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Quick Links Section */}
+        <div className="mt-24 pt-12 border-t border-border">
+          <h2 className="text-2xl font-bold text-center mb-12">Explore Our Services</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Web Development",
+                description: "Custom websites tailored to your business needs",
+                link: "/services",
+                icon: "🌐"
+              },
+              {
+                title: "UI/UX Design",
+                description: "User-friendly interfaces that convert visitors",
+                link: "/services",
+                icon: "🎨"
+              },
+              {
+                title: "SEO Optimization",
+                description: "Improve your site's visibility in search results",
+                link: "/services",
+                icon: "📈"
+              }
+            ].map((service, index) => (
+              <Link 
+                to={service.link} 
+                key={index}
+                className="p-6 rounded-xl border border-border bg-background/50 hover:bg-primary/5 transition-all group"
+              >
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
+                <p className="text-muted-foreground mb-4">{service.description}</p>
+                <div className="flex items-center text-primary font-medium">
+                  Learn more
+                  <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
       
