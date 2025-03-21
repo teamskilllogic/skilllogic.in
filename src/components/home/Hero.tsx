@@ -1,7 +1,6 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Code, Globe, Zap } from "lucide-react";
+import { ArrowRight, Code, Globe, Zap, Users } from "lucide-react";
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
