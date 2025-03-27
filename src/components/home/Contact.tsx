@@ -8,6 +8,7 @@ interface FormData {
   email: string;
   phone: string;
   service: string;
+  budget:string;
   message: string;
 }
 
@@ -17,6 +18,7 @@ const ContactSection: React.FC = () => {
     email: "",
     phone: "",
     service: "website-development",
+    budget:"",
     message: ""
   });
   
@@ -28,29 +30,73 @@ const ContactSection: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+    
+  //   // Simulate form submission
+  //   setTimeout(() => {
+  //     setIsSubmitting(false);
+  //     setIsSubmitted(true);
+  //     toast.success("Your message has been sent successfully!");
+      
+  //     // Reset form after 3 seconds
+  //     setTimeout(() => {
+  //       setIsSubmitted(false);
+  //       setFormData({
+  //         name: "",
+  //         email: "",
+  //         phone: "",
+  //         service: "website-development",
+  //         message: ""
+  //       });
+  //     }, 3000);
+  //   }, 1500);
+  // };
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    const formDataToPost = {
+      "entry.1944049300": formData.name, // Name
+      "entry.374964765": formData.email, // Email
+      "entry.1790204456": formData.phone, // Phone
+      "entry.1925826835": formData.service, // Service
+      "entry.480746096": formData.budget, // Budget
+      "entry.418517939": formData.message // Message
+    };
+  
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdKE2zl8H7a_qwytp3x6dPShkXbNlZBwb-APuJ1of5AOAkoag/formResponse";
+  
+    const formBody = new URLSearchParams(formDataToPost).toString();
+  
+    try {
+      await fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formBody
+      });
+  
+      // alert("Form submitted successfully!");
       toast.success("Your message has been sent successfully!");
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
+      setFormData({
           name: "",
           email: "",
           phone: "",
           service: "website-development",
+          budget: "",
           message: ""
         });
-      }, 3000);
-    }, 1500);
+    } catch (error) {
+      // console.error("Error submitting form", error);
+      alert("Something went wrong!")
+    }
+    setIsSubmitting(false);
+
   };
+
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-muted/30 to-background">
@@ -162,6 +208,28 @@ const ContactSection: React.FC = () => {
                   </div>
                 </div>
                 
+    
+                <div>
+                      <label htmlFor="budget" className="block text-sm font-medium mb-2">
+                        Budget Range
+                      </label>
+                      <select
+                        id="budget"
+                        name="budget"
+                        value={formData.budget}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none"
+                      >
+                        <option value="">Select a budget range</option>
+                        <option value="less-than-5k">Less than $5,000</option>
+                        <option value="5k-10k">$5,000 - $10,000</option>
+                        <option value="10k-20k">$10,000 - $20,000</option>
+                        <option value="20k-plus">$20,000+</option>
+                        <option value="not-sure">Not sure yet</option>
+                      </select>
+                    </div>
+
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Your Message*

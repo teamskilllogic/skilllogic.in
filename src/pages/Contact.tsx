@@ -32,20 +32,87 @@ const ContactPage: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+
+
+  
+  
+
+
+
+
+
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   console.log(formData);
+  //   setFormData({
+  //     name: "",
+  //     email: "",
+  //     phone: "",
+  //     service: "website-development",
+  //     budget: "",
+  //     message: ""
+  //   });
+
+  //   setIsSubmitted(false);
+  //   toast.success("Your message has been sent successfully!");
+
+  //   return;
+
+    
+  //   // // Simulate form submission
+  //   // setTimeout(() => {
+  //   //   setIsSubmitting(false);
+  //   //   setIsSubmitted(true);
+  //   //   toast.success("Your message has been sent successfully!");
+      
+  //   //   // Reset form after 3 seconds
+  //   //   setTimeout(() => {
+  //   //     setIsSubmitted(false);
+  //   //     setFormData({
+  //   //       name: "",
+  //   //       email: "",
+  //   //       phone: "",
+  //   //       service: "website-development",
+  //   //       budget: "",
+  //   //       message: ""
+  //   //     });
+  //   //   }, 3000);
+  //   // }, 1500);
+  // };
+
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+    const formDataToPost = {
+      "entry.1944049300": formData.name, // Name
+      "entry.374964765": formData.email, // Email
+      "entry.1790204456": formData.phone, // Phone
+      "entry.1925826835": formData.service, // Service
+      "entry.480746096": formData.budget, // Budget
+      "entry.418517939": formData.message // Message
+    };
+  
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdKE2zl8H7a_qwytp3x6dPShkXbNlZBwb-APuJ1of5AOAkoag/formResponse";
+  
+    const formBody = new URLSearchParams(formDataToPost).toString();
+  
+    try {
+      await fetch(formUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formBody
+      });
+  
+      // alert("Form submitted successfully!");
       toast.success("Your message has been sent successfully!");
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
+      setFormData({
           name: "",
           email: "",
           phone: "",
@@ -53,9 +120,15 @@ const ContactPage: React.FC = () => {
           budget: "",
           message: ""
         });
-      }, 3000);
-    }, 1500);
+    } catch (error) {
+      // console.error("Error submitting form", error);
+      alert("Something went wrong!")
+    }
+    setIsSubmitting(false);
+
   };
+  
+
 
   return (
     <div className="min-h-screen">
@@ -264,8 +337,8 @@ const ContactPage: React.FC = () => {
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-white mb-1">Call Us</h3>
-                        <a href="tel:+1234567890" className="text-primary-foreground/80 hover:text-white transition-colors">
-                          +1 (234) 567-890
+                        <a href="tel:+91 8318943040" className="text-primary-foreground/80 hover:text-white transition-colors">
+                        +91 8318943040
                         </a>
                         <p className="text-primary-foreground/60 text-sm mt-1">
                           Mon-Fri: 9:00 AM - 6:00 PM
@@ -280,9 +353,9 @@ const ContactPage: React.FC = () => {
                       <div>
                         <h3 className="text-lg font-semibold text-white mb-1">Visit Us</h3>
                         <p className="text-primary-foreground/80">
-                          123 Web Avenue, Digital District
+                        Civil Lines Power House Road Bhadohi -221401
                           <br />
-                          Tech City, 12345
+                          Uttar Pradesh India
                         </p>
                       </div>
                     </div>
@@ -291,10 +364,15 @@ const ContactPage: React.FC = () => {
                   <div className="mt-8 pt-6 border-t border-white/20">
                     <h3 className="text-lg font-semibold text-white mb-3">Connect With Us</h3>
                     <div className="flex space-x-3">
+                    <link
+                          rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+                          />
+                      
                       {[
-                        { name: "Facebook", url: "https://facebook.com" },
-                        { name: "Twitter", url: "https://twitter.com" },
-                        { name: "LinkedIn", url: "https://linkedin.com" },
+                        { name: "Facebook", url: "https://facebook.com", icon: "fab fa-facebook-f" },
+                        { name: "Twitter", url: "https://twitter.com", icon: "fab fa-twitter" },
+                        { name: "LinkedIn", url: "https://www.linkedin.com/company/skilllogic-technologies/" },
                         { name: "Instagram", url: "https://instagram.com" }
                       ].map((social, index) => (
                         <a
@@ -332,7 +410,7 @@ const ContactPage: React.FC = () => {
                 
                 <div className="rounded-2xl overflow-hidden shadow-sm">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.305916!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1619393302769!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4374.232585460434!2d82.5577388!3d25.3874712!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fe1d3e8a22c77%3A0x9408742a05b0ad93!2sSkill%20Logic%20Technologies!5e1!3m2!1sen!2sin!4v1742657773462!5m2!1sen!2sin"
                     width="100%"
                     height="300"
                     style={{ border: 0 }}
