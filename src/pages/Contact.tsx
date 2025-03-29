@@ -225,7 +225,7 @@ const ContactPage: React.FC = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none"
-                          placeholder="+1 234 567 8900"
+                          placeholder="+91 "
                         />
                       </div>
                       <div>
@@ -262,12 +262,13 @@ const ContactPage: React.FC = () => {
                         className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none"
                       >
                         <option value="">Select a budget range</option>
-                        <option value="less-than-5k">Less than $5,000</option>
-                        <option value="5k-10k">$5,000 - $10,000</option>
-                        <option value="10k-20k">$10,000 - $20,000</option>
-                        <option value="20k-plus">$20,000+</option>
-                        <option value="not-sure">Not sure yet</option>
-                      </select>
+<option value="less-than-40k">Less than ₹40,000</option>
+<option value="40k-80k">₹40,000 - ₹80,000</option>
+<option value="80k-1.6l">₹80,000 - ₹1,60,000</option>
+<option value="custom">Custom Budget</option>
+<option value="not-sure">Not sure yet</option>
+</select>
+
                     </div>
                     
                     <div>
@@ -373,7 +374,7 @@ const ContactPage: React.FC = () => {
                         { name: "Facebook", url: "https://facebook.com", icon: "fab fa-facebook-f" },
                         { name: "Twitter", url: "https://twitter.com", icon: "fab fa-twitter" },
                         { name: "LinkedIn", url: "https://www.linkedin.com/company/skilllogic-technologies/" },
-                        { name: "Instagram", url: "https://instagram.com" }
+                        { name: "Instagram", url: "https://www.instagram.com/skilllogic.in?igsh=aml3dDNza2thZ2Q5" }
                       ].map((social, index) => (
                         <a
                           key={index}

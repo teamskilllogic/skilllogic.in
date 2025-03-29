@@ -19,18 +19,19 @@ const AboutPage: React.FC = () => {
   
   const team = [
     {
-      name: "Alex Johnson",
+      name: "Satyam Srivastava",
       position: "Founder & CEO",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
       bio: "With over 15 years of experience in web development and digital strategy, Alex founded SkillLogic to help businesses leverage technology for growth.",
     },
     {
-      name: "Sarah Williams",
-      position: "Lead Designer",
-      image: "https://randomuser.me/api/portraits/women/42.jpg",
-      bio: "Sarah brings 10+ years of UI/UX expertise, creating user-centered designs that combine aesthetics with functionality for optimal user experiences.",
+      name: "Arpit Shrivastva",
+    position: "AWS DevOps Engineer",
+    image: "./images/arpit.jpeg", 
+    bio: "DevOps Engineer | Linux | AWS | Networking | Server Management | Security | GitHub | JIRA | Problem-Solver."
     },
     {
+      
       name: "Michael Chen",
       position: "Technical Director",
       image: "https://randomuser.me/api/portraits/men/22.jpg",

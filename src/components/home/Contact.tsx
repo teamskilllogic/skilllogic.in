@@ -183,7 +183,7 @@ const ContactSection: React.FC = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none"
-                      placeholder="+1 234 567 8900"
+                      placeholder="+91"
                     />
                   </div>
                   <div>
@@ -220,13 +220,13 @@ const ContactSection: React.FC = () => {
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all outline-none"
                       >
-                        <option value="">Select a budget range</option>
-                        <option value="less-than-5k">Less than $5,000</option>
-                        <option value="5k-10k">$5,000 - $10,000</option>
-                        <option value="10k-20k">$10,000 - $20,000</option>
-                        <option value="20k-plus">$20,000+</option>
-                        <option value="not-sure">Not sure yet</option>
-                      </select>
+                       <option value="">Select a budget range</option>
+<option value="less-than-40k">Less than ₹40,000</option>
+<option value="40k-80k">₹40,000 - ₹80,000</option>
+<option value="80k-1.6l">₹80,000 - ₹1,60,000</option>
+<option value="custom">Custom Budget</option>
+<option value="not-sure">Not sure yet</option>
+</select>
                     </div>
 
 
@@ -292,7 +292,7 @@ const ContactSection: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-semibold text-white">Call Us</h4>
                   <a href="tel:+1234567890" className="text-primary-foreground/80 hover:text-white transition-colors">
-                    +1 (234) 567-890
+                    +91 8318446250
                   </a>
                 </div>
               </div>
@@ -304,7 +304,7 @@ const ContactSection: React.FC = () => {
                 <div>
                   <h4 className="text-lg font-semibold text-white">Visit Us</h4>
                   <p className="text-primary-foreground/80">
-                    123 Web Avenue, Digital District, Tech City, 12345
+                  Civil Lines Power House Road Bhadohi -221401, Uttar Pradesh India
                   </p>
                 </div>
               </div>
@@ -329,16 +329,18 @@ const ContactSection: React.FC = () => {
             </div>
             
             <div className="rounded-2xl overflow-hidden shadow-sm">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.305916!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1619393302769!5m2!1sen!2sin"
-                width="100%"
-                height="200"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                title="Office Location"
-              ></iframe>
-            </div>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3604.5091666490575!2d82.55654708687123!3d25.387761666184147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fe1d3e8a22c77%3A0x9408742a05b0ad93!2sSkill%20Logic%20Technologies!5e0!3m2!1sen!2sin!4v1743269557195!5m2!1sen!2sin"
+    width="100%"
+    height="200"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="Office Location"
+  ></iframe>
+</div>
+
           </div>
         </div>
       </div>

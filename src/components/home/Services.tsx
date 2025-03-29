@@ -24,6 +24,7 @@ const ServicesSection: React.FC = () => {
       icon: <Globe className="w-6 h-6" />,
       link: "/services#website-development",
       features: ["Business Websites", "Personal Portfolios", "Landing Pages"]
+      
     },
     {
       id: "web-app-development",

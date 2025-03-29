@@ -21,8 +21,9 @@ const ServicesPage: React.FC = () => {
         "Website Maintenance & Updates"
       ],
       projects: ["ArtFolio Creative Agency", "TechHub Innovations", "HealthCare Solutions"],
-      bgColor: "bg-blue-50 dark:bg-blue-900/20"
+      bgColor: "bg-[url('/images/web.jpeg')] bg-cover bg-no-repeat bg-center",
     },
+  
     {
       id: "web-app-development",
       title: "Web App Development",

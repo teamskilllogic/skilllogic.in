@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
                 <Twitter size={18} />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/skilllogic.in?igsh=aml3dDNza2thZ2Q5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
